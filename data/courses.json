@@ -1,0 +1,30 @@
+[
+  {
+    "subject": "CS",
+    "number": "493",
+    "title": "Cloud Application Development",
+    "term": "sp26",
+    "instructorId": 2
+  },
+  {
+    "subject": "CS",
+    "number": "340",
+    "title": "Introduction to Databases",
+    "term": "sp26",
+    "instructorId": 2
+  },
+  {
+    "subject": "CS",
+    "number": "361",
+    "title": "Introduction to Computer Networks",
+    "term": "sp26",
+    "instructorId": 3
+  },
+  {
+    "subject": "CS",
+    "number": "444",
+    "title": "Operating Systems II",
+    "term": "sp26",
+    "instructorId": 3
+  }
+]

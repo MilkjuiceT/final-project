@@ -1,0 +1,32 @@
+[
+  {
+    "courseId": 1,
+    "title": "Assignment 1 - REST API Basics",
+    "dueDate": "2026-04-15T23:59:00.000Z",
+    "points": 100
+  },
+  {
+    "courseId": 1,
+    "title": "Assignment 2 - Authentication",
+    "dueDate": "2026-05-01T23:59:00.000Z",
+    "points": 100
+  },
+  {
+    "courseId": 1,
+    "title": "Assignment 3 - Databases",
+    "dueDate": "2026-05-15T23:59:00.000Z",
+    "points": 100
+  },
+  {
+    "courseId": 2,
+    "title": "Project 1 - ER Diagram",
+    "dueDate": "2026-04-20T23:59:00.000Z",
+    "points": 50
+  },
+  {
+    "courseId": 2,
+    "title": "Project 2 - SQL Queries",
+    "dueDate": "2026-05-10T23:59:00.000Z",
+    "points": 75
+  }
+]

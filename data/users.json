@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Admin User",
+    "email": "admin@tarpaulin.com",
+    "password": "adminpass123",
+    "role": "admin"
+  },
+  {
+    "name": "Alice Instructor",
+    "email": "alice@tarpaulin.com",
+    "password": "alicepass123",
+    "role": "instructor"
+  },
+  {
+    "name": "Bob Instructor",
+    "email": "bob@tarpaulin.com",
+    "password": "bobpass123",
+    "role": "instructor"
+  },
+  {
+    "name": "Student One",
+    "email": "student1@tarpaulin.com",
+    "password": "studentpass123",
+    "role": "student"
+  },
+  {
+    "name": "Student Two",
+    "email": "student2@tarpaulin.com",
+    "password": "studentpass123",
+    "role": "student"
+  },
+  {
+    "name": "Student Three",
+    "email": "student3@tarpaulin.com",
+    "password": "studentpass123",
+    "role": "student"
+  }
+]
