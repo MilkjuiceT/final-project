@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 
 import prisma from "../lib/prisma.js";
 import { UserCreate, UserLogin } from "../lib/zod.js"
-import { generateAuthToken, checkAuth } from "../lib/auth.js";
+import { generateAuthToken, checkAuth, requireAuth, requireRole } from "../lib/auth.js";
 
 
 const router = Router()
@@ -13,11 +13,11 @@ const router = Router()
 * Registers a user
 * Allows admin registration if admin is logged in
 */
-router.get('/', checkAuth, async (req, res, next) => {
+router.post('/', checkAuth, async (req, res, next) => {
     // Validate the user input
     const data = UserCreate.parse(req.body)
     if(!data) {
-        res.status(400).setDefaultEncoding({
+        res.status(400).send({
             err: "The request body was either not present or did not contain a valid User object."
         })
     }
@@ -42,6 +42,42 @@ router.get('/', checkAuth, async (req, res, next) => {
     }
 })
 
+/*
+* GET /users/:id
+* Retrieve information about a user
+* Only retrieve information if you have access to it
+*/
+router.get('/:id', requireAuth, async (req, res, next) => {
+    const id = parseInt(req.params.id)
+    // Validate that the user is who they say they are
+    if(id === req.user || req.role === 'admin') {
+        // if the user is an instructor
+        if(req.role === 'instructor') {
+            const instructorCourses = await prisma.course.findMany({
+                where: { instructorId: id }
+            })
+            res.status(200).send({
+                courseIds: instructorCourses
+            })
+        }
+        if(req.role === 'student') {
+            const studentEnrollment = await prisma.enrollment.findMany({
+                where: { userId: id },
+                include: { course: true }
+            })
+            const studentCourses = studentEnrollment.map(e => e.course)
+            res.status(200).send({
+                courseIds: studentCourses
+            })
+
+        }
+    } else {
+        res.status(403).send({
+            err: "The request was not made by an authenticated User satisfying the authorization criteria."
+        })
+    }
+})
+
 
 /*
 * POST /users/login
@@ -58,10 +94,10 @@ router.post('/login', async (req, res, next) => {
             where: { email: data.email }
         })
         // Validate the password
-        const auth = userData && await bcrypt.compare(data.password, userData.password) 
+        const auth = userData && await bcrypt.compare(data.password, userData.passwordHash) 
         if (auth) {
             // Create token and respond to user
-            const token = generateAuthToken(userData.id, userData.admin)
+            const token = generateAuthToken(userData.id, userData.role)
             res.status(200).send({ token: token })
         } else {
             // Return 401 if user credentials are wrong or user does not exist
@@ -75,3 +111,5 @@ router.post('/login', async (req, res, next) => {
         })
     }
 })
+
+export default router

@@ -31,8 +31,8 @@ router.get('/', requireAuth, async (req, res, next) => {
         })
         if (!assignment) return next()
 
-        const isAdmin = req.user.role === 'admin'
-        const isInstructor = req.user.id === assignment.course.instructorId
+        const isAdmin = req.role === 'admin'
+        const isInstructor = req.id === assignment.course.instructorId
 
         // Students can only see their own submissions
         const where = { assignmentId }
@@ -75,6 +75,7 @@ router.get('/', requireAuth, async (req, res, next) => {
  * Students only, and must be enrolled in the course.
  */
 router.post('/', requireAuth, requireRole('student'), upload.single('file'), async (req, res, next) => {
+    console.log("USER:", req.user)
     try {
         const assignmentId = parseInt(req.params.id)
         const assignment = await prisma.assignment.findUnique({
@@ -86,7 +87,7 @@ router.post('/', requireAuth, requireRole('student'), upload.single('file'), asy
         const enrollment = await prisma.enrollment.findUnique({
             where: {
                 userId_courseId: {
-                    userId: req.user.id,
+                    userId: req.user,
                     courseId: assignment.courseId
                 }
             }
@@ -127,7 +128,7 @@ router.post('/', requireAuth, requireRole('student'), upload.single('file'), asy
         const submission = await prisma.submission.create({
             data: {
                 assignmentId,
-                studentId: req.user.id,
+                studentId: req.user,
                 fileUrl,
                 filename
             }
@@ -160,7 +161,7 @@ router.patch('/:submissionId', requireAuth, async (req, res, next) => {
         })
         if (!assignment) return next()
 
-        if (req.user.role !== 'admin' && req.user.id !== assignment.course.instructorId) {
+        if (req.role !== 'admin' && req.id !== assignment.course.instructorId) {
             return res.status(403).send({ error: 'Forbidden' })
         }
 

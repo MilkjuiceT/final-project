@@ -131,7 +131,7 @@ router.get('/:id/students', requireAuth, async (req, res, next) => {
         if (!course) return next()
 
         // Only admin or the course instructor can see the roster
-        if (req.user.role !== 'admin' && req.user.id !== course.instructorId) {
+        if (req.role !== 'admin' && req.id !== course.instructorId) {
             return res.status(403).send({ error: 'Forbidden' })
         }
 
@@ -157,7 +157,7 @@ router.post('/:id/students', requireAuth, async (req, res, next) => {
         const course = await prisma.course.findUnique({ where: { id } })
         if (!course) return next()
 
-        if (req.user.role !== 'admin' && req.user.id !== course.instructorId) {
+        if (req.role !== 'admin' && req.id !== course.instructorId) {
             return res.status(403).send({ error: 'Forbidden' })
         }
 
@@ -198,7 +198,7 @@ router.get('/:id/roster', requireAuth, async (req, res, next) => {
         const course = await prisma.course.findUnique({ where: { id } })
         if (!course) return next()
 
-        if (req.user.role !== 'admin' && req.user.id !== course.instructorId) {
+        if (req.role !== 'admin' && req.id !== course.instructorId) {
             return res.status(403).send({ error: 'Forbidden' })
         }
 
