@@ -94,11 +94,19 @@ router.post('/', requireAuth, requireRole('admin'), async (req, res, next) => {
 
 /*
  * PATCH /courses/:id
- * Updates a course. Admin only.
+ * Updates a course. Admin or the course instructor only.
  */
-router.patch('/:id', requireAuth, requireRole('admin'), async (req, res, next) => {
+router.patch('/:id', requireAuth, requireRole('admin', 'instructor'), async (req, res, next) => {
     try {
         const id = parseInt(req.params.id)
+
+        const existing = await prisma.course.findUnique({ where: { id } })
+        if (!existing) return next()
+
+        if (req.role === 'instructor' && req.user !== existing.instructorId) {
+            return res.status(403).send({ error: 'Forbidden' })
+        }
+
         const data = CourseUpdate.parse(req.body)
         const course = await prisma.course.update({ where: { id }, data })
         res.status(200).send(course)

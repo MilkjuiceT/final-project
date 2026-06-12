@@ -6,7 +6,6 @@ import path from 'path'
 import prisma from '../lib/prisma.js'
 import supabase, { SUBMISSIONS_BUCKET } from '../lib/supabase.js'
 import { publishPlagiarismTask } from '../lib/rabbitmq.js'
-import { SubmissionGrade } from '../lib/zod.js'
 import { requireAuth, requireRole } from '../lib/auth.js'
 
 const router = Router({ mergeParams: true })
@@ -140,38 +139,6 @@ router.post('/', requireAuth, requireRole('student'), upload.single('file'), asy
         })
 
         res.status(201).send({ id: submission.id, fileUrl })
-    } catch (err) {
-        next(err)
-    }
-})
-
-/*
- * PATCH /assignments/:id/submissions/:submissionId
- * Assigns a grade to a submission.
- * Admin or course instructor only.
- */
-router.patch('/:submissionId', requireAuth, async (req, res, next) => {
-    try {
-        const assignmentId = parseInt(req.params.id)
-        const submissionId = parseInt(req.params.submissionId)
-
-        const assignment = await prisma.assignment.findUnique({
-            where: { id: assignmentId },
-            include: { course: true }
-        })
-        if (!assignment) return next()
-
-        if (req.role !== 'admin' && req.user !== assignment.course.instructorId) {
-            return res.status(403).send({ error: 'Forbidden' })
-        }
-
-        const { grade } = SubmissionGrade.parse(req.body)
-        const submission = await prisma.submission.update({
-            where: { id: submissionId },
-            data: { grade }
-        })
-
-        res.status(200).send(submission)
     } catch (err) {
         next(err)
     }
