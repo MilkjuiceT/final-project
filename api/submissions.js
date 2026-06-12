@@ -20,7 +20,8 @@ const upload = multer({ storage: multer.memoryStorage() })
 /*
  * GET /assignments/:id/submissions
  * Returns paginated submissions for an assignment.
- * Admin or course instructor only.
+ * Students see only their own submissions.
+ * Admin or course instructor can see all, and may filter by studentId.
  */
 router.get('/', requireAuth, async (req, res, next) => {
     try {
@@ -32,12 +33,12 @@ router.get('/', requireAuth, async (req, res, next) => {
         if (!assignment) return next()
 
         const isAdmin = req.role === 'admin'
-        const isInstructor = req.id === assignment.course.instructorId
+        const isInstructor = req.user === assignment.course.instructorId
 
         // Students can only see their own submissions
         const where = { assignmentId }
         if (!isAdmin && !isInstructor) {
-            where.studentId = req.user.id
+            where.studentId = req.user
         } else if (req.query.studentId) {
             where.studentId = parseInt(req.query.studentId)
         }
@@ -75,7 +76,6 @@ router.get('/', requireAuth, async (req, res, next) => {
  * Students only, and must be enrolled in the course.
  */
 router.post('/', requireAuth, requireRole('student'), upload.single('file'), async (req, res, next) => {
-    console.log("USER:", req.user)
     try {
         const assignmentId = parseInt(req.params.id)
         const assignment = await prisma.assignment.findUnique({
@@ -161,7 +161,7 @@ router.patch('/:submissionId', requireAuth, async (req, res, next) => {
         })
         if (!assignment) return next()
 
-        if (req.role !== 'admin' && req.id !== assignment.course.instructorId) {
+        if (req.role !== 'admin' && req.user !== assignment.course.instructorId) {
             return res.status(403).send({ error: 'Forbidden' })
         }
 

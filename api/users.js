@@ -46,36 +46,43 @@ router.post('/', checkAuth, async (req, res, next) => {
 * GET /users/:id
 * Retrieve information about a user
 * Only retrieve information if you have access to it
+* (the user themselves, or an admin)
 */
 router.get('/:id', requireAuth, async (req, res, next) => {
     const id = parseInt(req.params.id)
-    // Validate that the user is who they say they are
-    if(id === req.user || req.role === 'admin') {
-        // if the user is an instructor
-        if(req.role === 'instructor') {
-            const instructorCourses = await prisma.course.findMany({
-                where: { instructorId: id }
-            })
-            res.status(200).send({
-                courseIds: instructorCourses
-            })
-        }
-        if(req.role === 'student') {
-            const studentEnrollment = await prisma.enrollment.findMany({
-                where: { userId: id },
-                include: { course: true }
-            })
-            const studentCourses = studentEnrollment.map(e => e.course)
-            res.status(200).send({
-                courseIds: studentCourses
-            })
 
-        }
-    } else {
-        res.status(403).send({
+    // Validate that the requester is either this user or an admin
+    if (id !== req.user && req.role !== 'admin') {
+        return res.status(403).send({
             err: "The request was not made by an authenticated User satisfying the authorization criteria."
         })
     }
+
+    const userData = await prisma.user.findUnique({ where: { id } })
+    if (!userData) return next()
+
+    // Include the list of courses this user teaches (instructor)
+    // or is enrolled in (student)
+    let courses = []
+    if (userData.role === 'instructor') {
+        courses = await prisma.course.findMany({
+            where: { instructorId: id }
+        })
+    } else if (userData.role === 'student') {
+        const enrollments = await prisma.enrollment.findMany({
+            where: { userId: id },
+            include: { course: true }
+        })
+        courses = enrollments.map(e => e.course)
+    }
+
+    res.status(200).send({
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        role: userData.role,
+        courses
+    })
 })
 
 

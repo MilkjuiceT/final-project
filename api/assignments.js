@@ -11,10 +11,7 @@ const router = Router()
  * Get assignment by ID
  */
 router.get('/:id', async (req, res) => {
-    console.log("something new")
   const id = parseInt(req.params.id)
-
-  console.log(`GET /assignments/${id} hit`)
 
   try {
     const assignment = await prisma.assignment.findUnique({
@@ -25,7 +22,7 @@ router.get('/:id', async (req, res) => {
 
     if (!assignment) {
       return res.status(404).json({
-        error: `Requested resource /assignments/${id} does not existed`
+        error: `Requested resource /assignments/${id} does not exist`
       })
     }
 
@@ -42,13 +39,11 @@ router.get('/:id', async (req, res) => {
 
 /*
  * POST /assignments
- * Create a new assignment
+ * Create a new assignment.
+ * Admin or instructor (of the target course) only.
  */
 router.post('/', requireAuth, requireRole('admin', 'instructor'), async (req, res) => {
         try {
-            console.log('POST /assignments hit')
-            console.log('Request body:', req.body)
-
             /*
              * Validate request body
              */
@@ -82,11 +77,9 @@ router.post('/', requireAuth, requireRole('admin', 'instructor'), async (req, re
              * Admin can always create
              * Instructor must own the course
              */
-            const user = req.user
-
             if (
-                user.role === 'instructor' &&
-                user.id !== course.instructorId
+                req.role === 'instructor' &&
+                req.user !== course.instructorId
             ) {
                 return res.status(403).json({
                     error: 'Forbidden'
@@ -124,7 +117,8 @@ router.post('/', requireAuth, requireRole('admin', 'instructor'), async (req, re
 
 /*
  * PATCH /assignments/:id
- * Update assignment by ID
+ * Update assignment by ID.
+ * Admin or instructor (who owns the course) only.
  */
 router.patch(
     '/:id',
@@ -133,9 +127,6 @@ router.patch(
     async (req, res) => {
         try {
             const id = parseInt(req.params.id)
-
-            console.log(`PATCH /assignments/${id} hit`)
-            console.log('Request body:', req.body)
 
             /*
              * Validate assignment ID
@@ -193,12 +184,12 @@ router.patch(
 
             /*
              * Authorization check
+             * Admin can always update
+             * Instructor must own the course
              */
-            const user = req.user
-
             if (
-                user.role === 'instructor' &&
-                user.id !== course.instructorId
+                req.role === 'instructor' &&
+                req.user !== course.instructorId
             ) {
                 return res.status(403).json({
                     error: 'Forbidden'
@@ -237,7 +228,8 @@ router.patch(
 
 /*
  * DELETE /assignments/:id
- * Delete assignment by ID
+ * Delete assignment by ID.
+ * Admin or instructor (who owns the course) only.
  */
 router.delete(
     '/:id',
@@ -246,8 +238,6 @@ router.delete(
     async (req, res) => {
         try {
             const id = parseInt(req.params.id)
-
-            console.log(`DELETE /assignments/${id} hit`)
 
             /*
              * Validate ID
@@ -282,12 +272,12 @@ router.delete(
 
             /*
              * Authorization check
+             * Admin can always delete
+             * Instructor must own the course
              */
-            const user = req.user
-
             if (
-                user.role === 'instructor' &&
-                user.id !== course.instructorId
+                req.role === 'instructor' &&
+                req.user !== course.instructorId
             ) {
                 return res.status(403).json({
                     error: 'Forbidden'

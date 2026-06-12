@@ -1,0 +1,706 @@
+{
+  "info": {
+    "_postman_id": "b7af140a-48d9-4e3e-b3a5-ebed6b547248",
+    "name": "Final Project",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53866349",
+    "_collection_link": "https://go.postman.co/collection/53866349-b7af140a-48d9-4e3e-b3a5-ebed6b547248?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "assignments",
+      "item": [
+        {
+          "name": "Get assignments id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/assignments/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments",
+                "1"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Get assignments id submissions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyNDExNSwiZXhwIjoxNzgxMzEwNTE1fQ.4ycJeaUguWukvc1rQZC_LQU7x_0zERa8_xrFloxhqvw",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/assignments/4/submissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments",
+                "4",
+                "submissions"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Post assignments id submissions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzgxMjI2Mzg2LCJleHAiOjE3ODEzMTI3ODZ9.MnCdz_dyLkpo93SlOvAt6ybm31BGNS3aAD7LUiXEvQ4",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "78ad383b-a8a1-4b13-89c3-cf12329d6332",
+                  "src": "/C:/Users/tscha/Downloads/CS 493 Final Project.pdf"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8000/assignments/4/submissions",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments",
+                "4",
+                "submissions"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Post assignments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyNDExNSwiZXhwIjoxNzgxMzEwNTE1fQ.4ycJeaUguWukvc1rQZC_LQU7x_0zERa8_xrFloxhqvw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"courseId\": 1,\r\n  \"title\": \"Assignment 3\",\r\n  \"dueDate\": \"2022-06-15T00:00:00Z\",\r\n  \"points\": 100\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/assignments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Patch assignments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyNDExNSwiZXhwIjoxNzgxMzEwNTE1fQ.4ycJeaUguWukvc1rQZC_LQU7x_0zERa8_xrFloxhqvw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"courseId\": 1,\r\n  \"title\": \"Assignment 3\",\r\n  \"points\": 100,\r\n  \"due\": \"2022-06-14T17:00:00-07:00\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/assignments/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments",
+                "1"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        },
+        {
+          "name": "Delete assignments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Successful POST request\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyNDExNSwiZXhwIjoxNzgxMzEwNTE1fQ.4ycJeaUguWukvc1rQZC_LQU7x_0zERa8_xrFloxhqvw",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/assignments/6",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments",
+                "6"
+              ]
+            },
+            "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"email\": \"admin@tarpaulin.com\",\r\n    \"password\": \"adminpass123\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/users/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "users",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyMjU5MCwiZXhwIjoxNzgxMzA4OTkwfQ.Fxje5D-meOWxvdKIA0YOf95bXVm7maDm2XeOD0aM2C0",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Jane Doe\",\r\n  \"email\": \"doej@oregonstate.edu\",\r\n  \"password\": \"hunter20\",\r\n  \"role\": \"student\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/users",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user id",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsInJvbGUiOiJzdHVkZW50IiwiaWF0IjoxNzgxMjI5MTYyLCJleHAiOjE3ODEzMTU1NjJ9.Fi-nyQL7eoqoN4xeDNfzEQeoNawWzhvkRyMSwwPs_xo",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/users/4",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "users",
+                "4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "submissions",
+      "item": [
+        {
+          "name": "Patch submissions id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"assignmentId\": 4,\r\n  \"studentId\": 4,\r\n  \"timestamp\": \"2022-06-14T17:00:00-07:00\",\r\n  \"grade\": 94.5,\r\n  \"file\": \"string\",\r\n  \"plagiarismScore\": 4\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/assignments/4/submissions/3",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "assignments",
+                "4",
+                "submissions",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "courses",
+      "item": [
+        {
+          "name": "Get Courses",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "  {\r\n    \"email\": \"admin@tarpaulin.com\",\r\n    \"password\": \"adminpass123\"\r\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/courses",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Courses id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/courses/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Courses id students",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/courses/2/students",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "2",
+                "students"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Courses id roster",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/courses/2/roster",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "2",
+                "roster"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Courses id assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/courses/1/assignments",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "1",
+                "assignments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Courses",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"subject\": \"CS\",\r\n  \"number\": \"493\",\r\n  \"title\": \"Cloud Application Development\",\r\n  \"term\": \"sp22\",\r\n  \"instructorId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/courses",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Courses id students",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"add\": [\r\n    1,\r\n    2\r\n  ],\r\n  \"remove\": [\r\n    1,\r\n    2\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/courses/2/students",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "2",
+                "students"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch Courses id",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"subject\": \"CS\",\r\n  \"number\": \"493\",\r\n  \"title\": \"Cloud Application Development\",\r\n  \"term\": \"sp22\",\r\n  \"instructorId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8000/courses/2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Courses id Copy",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTIyOTQwNywiZXhwIjoxNzgxMzE1ODA3fQ.0v1eeAPdJTbIlwUEK9YYXXMzgw03ymxNG2_-RBSdWp8",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/courses/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "courses",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
